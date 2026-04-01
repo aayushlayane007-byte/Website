@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aayush Layane</title>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ease-out-expo: cubic-bezier(0.16,1,0.3,1); }
+
+    #pageLayer {
+      opacity: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── F1 INTRO ── */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      overflow: hidden;
+      transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
+    }
+
+    #intro.zoom-out {
+      opacity: 0;
+      transform: scale(3.5) translateZ(0);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+
+    .f1-gantry {
+      display: flex;
+      gap: 30px;
+      padding: 24px 48px;
+      background: #111;
+      border-radius: 16px;
+      box-shadow: 
+        inset 0 4px 10px rgba(0,0,0,0.8),
+        0 14px 40px rgba(0,0,0,0.9),
+        0 0 20px rgba(255, 0, 0, 0.2);
+      border: 2px solid #cc0000;
+      margin-bottom: 60px;
+      z-index: 2;
+    }
+
+    .light-box {
+      width: 86px;
+      height: 86px;
+      background: #050505;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 
+        inset 0 8px 18px rgba(0,0,0,0.9),
+        inset 0 -2px 6px rgba(255,255,255,0.06);
+      border: 2px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .f1-light {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #1a0000 0%, #000 100%);
+      box-shadow: inset 0 0 12px rgba(0,0,0,1);
+      transition: background 0.05s, box-shadow 0.05s;
+    }
+
+    .f1-light.on {
+      background: radial-gradient(circle at 40% 40%, #ffffff 0%, #ff1a1a 15%, #cc0000 50%, #4d0000 100%);
+      box-shadow: 
+        0 0 24px rgba(255, 0, 0, 0.9),
+        0 0 70px rgba(255, 0, 0, 0.6),
+        0 0 140px rgba(255, 0, 0, 0.4),
+        inset 0 0 18px rgba(255, 255, 255, 0.9);
+    }
+
+    #introName {
+      font-family: Inter, sans-serif;
+      font-size: 64px;
+      font-style: italic;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px) scale(0.95);
+      color: #fff;
+      text-shadow: 0 0 30px #6600ff, 0 0 60px #6600ff, 0 0 100px #6600ff;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      z-index: 1;
+    }
+
+    #introName.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px; box-sizing: border-box;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+    }
+    .logo { perspective: 800px; }
+    .logo img {
+      height: 96px; width: auto; display: block;
+      transition: transform 1.5s ease; transform-style: preserve-3d;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    .logo img:hover { transform: rotateY(360deg); }
+    @keyframes logoPulse {
+      0%   { filter: drop-shadow(0 0 0px rgba(220,230,255,0)); }
+      50%  { filter: drop-shadow(0 0 40px rgba(200,220,255,1)) drop-shadow(0 0 80px rgba(160,200,255,0.9)) drop-shadow(0 0 120px rgba(120,180,255,0.8)); }
+      100% { filter: drop-shadow(0 0 0px rgba(220,230,255,0)); }
+    }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a { color: white; text-decoration: none; font-family: Inter, sans-serif; font-size: 24px; transition: opacity 0.2s ease; }
+    nav a:hover { opacity: 0.6; }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 0; z-index: 1100; }
+    .hamburger span { display: block; height: 2px; background: white; border-radius: 2px; transition: transform 0.35s var(--ease-out-expo), opacity 0.25s ease; }
+    .hamburger span:nth-child(1) { width: 28px; }
+    .hamburger span:nth-child(2) { width: 20px; }
+    .hamburger span:nth-child(3) { width: 24px; }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 28px; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 28px; }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-family: Inter, sans-serif; font-size: 32px; font-weight: 700; color: white; text-decoration: none; opacity: 0; transform: translateY(18px); transition: opacity 0.4s ease, transform 0.4s var(--ease-out-expo); }
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.20s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu a:hover { opacity: 0.6 !important; }
+
+    main { flex: 1; padding: 180px 40px 60px; box-sizing: border-box; }
+    .home-container { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .home-name { font-size: 48px; font-weight: 800; margin-bottom: 40px; color: white; cursor: pointer; transition: opacity 0.2s ease; letter-spacing: -0.02em; }
+    .home-name:hover { opacity: 0.7; }
+    .home-photo { width: 800px; max-width: 90vw; height: auto; border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+
+    /* ── HERO LAYOUT ── */
+    .hero-layout {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding-top: 20px;
+    }
+    .hero-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-left, .hero-right {
+      flex: 1 1 0;
+      justify-content: space-between;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    .hero-center {
+      flex: 0 0 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── PIRELLI CLOCKS ── */
+    .pirelli-clock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-left .pirelli-clock { transform: translate(-30px, -60px); }
+    .hero-right .pirelli-clock { transform: translate(30px, -60px); }
+    .tire-ring {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .pirelli-clock:hover .tire-ring { transform: scale(1.05) rotate(5deg); }
+    .tire-medium { background-image: url('assets/tire-yellow.png'); }
+    .tire-soft { background-image: url('assets/tire-red.png'); }
+    .clock-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.3); /* slightly dim the metallic rim for contrast */
+      box-shadow: none;
+    }
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom;
+      background: #fff;
+      border-radius: 4px;
+      transform: translateX(-50%) rotate(0deg);
+      transition: transform 0.05s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+      box-shadow: 0 0 4px rgba(0,0,0,1), 0 2px 6px rgba(0,0,0,0.6);
+    }
+    .hour-hand { width: 5px; height: 28%; z-index: 3; }
+    .min-hand { width: 3px; height: 42%; z-index: 4; }
+    .second-hand { width: 2px; height: 48%; background: #ff2800; box-shadow: 0 0 4px rgba(0,0,0,0.8); z-index: 5; }
+    .center-dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      border: 3px solid #111;
+    }
+    .clock-digital { text-align: center; }
+    .city-name { font-size: 14px; font-weight: 800; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 2px; text-transform: uppercase; }
+    .city-time { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; color: white; }
+
+    /* ── SLOT MACHINE ── */
+    .slot-group {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .slot-word {
+      display: flex;
+      gap: 6px;
+      border-top: 2px solid white;
+      border-bottom: 2px solid white;
+      padding: 10px 0;
+      justify-content: center;
+    }
+    .slot-window {
+      width: 44px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 44px;
+      font-weight: 800;
+      color: white;
+      position: relative;
+      background: transparent;
+      font-family: inherit;
+    }
+    .slot-reel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      transition: transform cubic-bezier(0.16, 1, 0.3, 1) 3s;
+    }
+    .slot-char {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+
+    .contact-block, .social-block { text-align: center; }
+    .contact-block h3, .social-block h3 { font-size: 26px; margin-bottom: 24px; font-weight: 600; color: rgba(255,255,255,0.9); }
+    .contact-info { display: flex; justify-content: center; gap: 32px; font-size: 20px; margin-bottom: 6px; }
+    .contact-info a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; }
+    .contact-info a:hover { color: #fff; }
+    
+    .social-links { display: flex; justify-content: center; gap: 32px; margin-top: 16px; }
+    .social-links svg { width: 36px; height: 36px; stroke: rgba(255,255,255,0.6); transition: stroke 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo), filter 0.3s ease; }
+    .social-links a:hover svg { stroke: #fff; transform: translateY(-6px) scale(1.1); filter: drop-shadow(0 0 12px rgba(255,255,255,0.4)); }
+    
+    .contact-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px; }
+    .contact-row svg { width: 24px; height: 24px; stroke: rgba(255,255,255,0.6); transition: stroke 0.2s; }
+    .contact-row:hover svg { stroke: #fff; }
+    .contact-row a { color: white; text-decoration: none; font-size: 20px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: border-color 0.2s; }
+    .contact-row a:hover { border-color: #fff; }
+    footer { text-align: center; padding: 20px 40px; font-size: 16px; opacity: 0.6; }
+
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo); }
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.2s; }
+
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      main { padding: 160px 24px 60px; }
+      .home-photo { width: 300px; }
+      .info-grid { gap: 48px; flex-direction: column; align-items: center; }
+      .home-name { font-size: 28px; }
+      .home-tagline { font-size: 24px; }
+
+      #introName {
+        font-size: 36px;
+        padding: 0 20px;
+      }
+      .f1-gantry {
+        gap: 12px;
+        padding: 16px 20px;
+        margin-bottom: 40px;
+      }
+      .light-box {
+        width: 52px;
+        height: 52px;
+      }
+      .f1-light { width: 44px; height: 44px; }
+      
+      .hero-layout { flex-direction: column; align-items: center; gap: 40px; }
+      .hero-left, .hero-right { width: 100%; align-items: center; padding-top: 0; }
+      .slot-group { align-items: center; }
+      .contact-block, .social-block { margin-top: 40px; }
+    }
+  </style>
+</head>
+<body class="home">
+
+  <div id="intro">
+    <div class="f1-gantry" id="f1Gantry">
+      <div class="light-box"><div class="f1-light"></div></div>
+      <div class="light-box"><div class="f1-light"></div></div>
+      <div class="light-box"><div class="f1-light"></div></div>
+      <div class="light-box"><div class="f1-light"></div></div>
+      <div class="light-box"><div class="f1-light"></div></div>
+    </div>
+    <div id="introName">It's lights out and away we go!</div>
+  </div>
+
+  <div id="pageLayer">
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="gateway.html">Gateway</a>
+      <a href="interests.html">Interests</a>
+      <a href="yearinreview.html">Year in Review</a>
+    </div>
+
+    <header>
+      <div class="logo">
+        <a href="index.html"><img src="assets/logo.png" alt="Aayush Layane logo"></a>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="gateway.html">Gateway</a>
+        <a href="interests.html">Interests</a>
+        <a href="yearinreview.html">Year in Review</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <main>
+      <div class="hero-layout">
+        
+        <!-- Left Wing -->
+        <div class="hero-col hero-left">
+          
+          <div class="pirelli-clock" id="clock-dfw">
+            <div class="tire-ring tire-medium">
+              <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+                <div class="center-dot"></div>
+              </div>
+            </div>
+            <div class="clock-digital">
+              <div class="city-name">DALLAS, USA</div>
+              <div class="city-time">00:00:00</div>
+            </div>
+          </div>
+
+          <div class="slot-group">
+            <div class="slot-word" data-word="WELCOME"></div>
+            <div class="slot-word" data-word="TO"></div>
+          </div>
+          <div class="contact-block">
+            <h3>Contact</h3>
+            <div class="contact-info">
+              <div class="contact-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <a href="tel:+15132238771">Phone</a>
+              </div>
+              <div class="contact-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <a href="mailto:aayush.layane007@gmail.com">Mail</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Wing -->
+        <div class="hero-col hero-center">
+          <h1 class="home-name" id="homeName">Aayush Layane</h1>
+          <div><img src="assets/myphoto.jpg" alt="Aayush Layane" class="home-photo"></div>
+        </div>
+
+        <!-- Right Wing -->
+        <div class="hero-col hero-right">
+          
+          <div class="pirelli-clock" id="clock-mum">
+            <div class="tire-ring tire-soft">
+              <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+                <div class="center-dot"></div>
+              </div>
+            </div>
+            <div class="clock-digital">
+              <div class="city-name">MUMBAI, IND</div>
+              <div class="city-time">00:00:00</div>
+            </div>
+          </div>
+
+          <div class="slot-group">
+            <div class="slot-word" data-word="MY"></div>
+            <div class="slot-word" data-word="WRLD!!"></div>
+          </div>
+          <div class="social-block">
+            <h3>Socials</h3>
+            <div class="social-links">
+              <a href="https://www.instagram.com/aayush._.999/" target="_blank" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.linkedin.com/feed/" target="_blank" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="https://github.com/aayushlayane007-byte" target="_blank" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+    <footer><p>© 2026 Aayush Layane</p></footer>
+  </div>
+
+  <script>
+  // ── F1 STARTING LIGHTS ──
+  (function() {
+    const introEl = document.getElementById('intro');
+    const lights = document.querySelectorAll('.f1-light');
+    const nameEl = document.getElementById('introName');
+    
+    // Stop scrolling during intro
+    document.body.style.overflow = 'hidden';
+    scrollTo(0, 0);
+
+    const delay = 300; // ms before first light
+    const interval = 400; // 0.4s between each light
+    
+    // 5 lights turn on sequentially
+    lights.forEach((light, index) => {
+      setTimeout(() => {
+        light.classList.add('on');
+      }, delay + (index * interval));
+    });
+
+    // Lights out with random tense hold (0.5s to 1.3s)
+    const lightsOutTime = delay + (5 * interval) + (Math.random() * 800 + 500);
+    
+    setTimeout(() => {
+      // Turn off all lights
+      lights.forEach(light => light.classList.remove('on'));
+      // Show Crofty's line
+      nameEl.classList.add('show');
+    }, lightsOutTime);
+
+    // Zoom Blur Reveal
+    setTimeout(() => {
+      introEl.classList.add('zoom-out');
+      // allow scrolling again
+      document.body.style.overflow = '';
+      
+      // Remove overlay completely
+      setTimeout(() => {
+        introEl.style.display = 'none';
+        
+        // --- TRIGGER SLOT MACHINE AFTER F1 INTRO OVER ---
+        triggerSlotMachine();
+      }, 1000);
+    }, lightsOutTime + 1400); // 1.4 seconds after lights go out
+  })();
+
+  // ── SLOT MACHINE LOGIC ──
+  function triggerSlotMachine() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+    const words = document.querySelectorAll('.slot-word');
+    
+    function spinWord(wordEl, isHover = false) {
+      if (wordEl.classList.contains('spinning')) return;
+      wordEl.classList.add('spinning');
+      
+      const targetWord = wordEl.getAttribute('data-word');
+      wordEl.innerHTML = ''; 
+      
+      for (let i = 0; i < targetWord.length; i++) {
+        const targetChar = targetWord[i];
+        
+        const win = document.createElement('div');
+        win.className = 'slot-window';
+        
+        const reel = document.createElement('div');
+        reel.className = 'slot-reel';
+        
+        const spinCount = isHover ? (12 + Math.floor(Math.random() * 8)) : (20 + Math.floor(Math.random() * 15));
+        
+        let reelHtml = '';
+        for (let j = 0; j < spinCount; j++) {
+          const randChar = chars[Math.floor(Math.random() * chars.length)];
+          reelHtml += `<div class="slot-char">${randChar}</div>`;
+        }
+        reelHtml += `<div class="slot-char">${targetChar}</div>`;
+        
+        reel.innerHTML = reelHtml;
+        win.appendChild(reel);
+        wordEl.appendChild(win);
+        
+        setTimeout(() => {
+          if (isHover) reel.style.transition = 'transform cubic-bezier(0.16, 1, 0.3, 1) 1.5s';
+          reel.style.transform = `translateY(-${spinCount * 60}px)`;
+        }, 50 + (i * 80)); 
+      }
+      
+      setTimeout(() => {
+        wordEl.classList.remove('spinning');
+      }, isHover ? 1800 : 3500);
+    }
+
+    words.forEach((wordEl, wordIndex) => {
+      // Setup hover styling
+      wordEl.style.cursor = 'crosshair';
+      
+      // Initial load animation (staggered)
+      setTimeout(() => spinWord(wordEl, false), wordIndex * 200);
+      
+      // Interactive hover
+      wordEl.addEventListener('mouseenter', () => spinWord(wordEl, true));
+    });
+  }
+
+  // ── WORLD CLOCKS LOGIC ──
+  function setupClocks() {
+    const dfwClock = document.getElementById('clock-dfw');
+    const mumClock = document.getElementById('clock-mum');
+    
+    function updateClock(clockEl, timeZone) {
+      if (!clockEl) return;
+      const now = new Date();
+      const timeString = now.toLocaleString("en-US", { timeZone, hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+      const [h, m, s] = timeString.split(':').map(Number);
+      
+      const hourDeg = (h % 12) * 30 + (m / 2);
+      const minDeg = m * 6 + (s / 10);
+      const secDeg = s * 6;
+      
+      const hHand = clockEl.querySelector('.hour-hand');
+      const mHand = clockEl.querySelector('.min-hand');
+      const sHand = clockEl.querySelector('.second-hand');
+      const timeDisplay = clockEl.querySelector('.city-time');
+      
+      hHand.style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+      mHand.style.transform = `translateX(-50%) rotate(${minDeg}deg)`;
+      sHand.style.transform = `translateX(-50%) rotate(${secDeg}deg)`;
+      
+      timeDisplay.innerText = timeString;
+    }
+
+    setInterval(() => {
+      updateClock(dfwClock, 'America/Chicago');
+      updateClock(mumClock, 'Asia/Kolkata');
+    }, 1000);
+    updateClock(dfwClock, 'America/Chicago');
+    updateClock(mumClock, 'Asia/Kolkata');
+  }
+  setupClocks();
+
+  // ── HAMBURGER ──
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const observer  = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
