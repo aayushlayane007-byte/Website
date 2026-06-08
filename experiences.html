@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiences – Aayush Layane</title>
+  <meta name="description" content="Aayush Layane's experiences — Innovation Challenge, Chicago, Teaching Assistant, and Miami.">
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; width: 100%; }
+    body.experiences {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    :root { --ease: cubic-bezier(0.16,1,0.3,1); }
+
+    /* ── NAV DROPDOWN ── */
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a { color: white; text-decoration: none; font-family: Inter, sans-serif; font-size: 24px; transition: opacity 0.2s ease; }
+    nav a:hover { opacity: 0.6; }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      color: white;
+      font-family: Inter, sans-serif;
+      font-size: 24px;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: opacity 0.2s ease;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* Active page highlight */
+    .nav-dropdown-trigger {
+      opacity: 1;
+      border-bottom: 2px solid rgba(255,255,255,0.5);
+      padding-bottom: 2px;
+    }
+
+    .nav-dropdown-trigger .caret {
+      display: inline-block;
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid rgba(255,255,255,0.7);
+      transition: transform 0.25s var(--ease);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .nav-dropdown:hover .caret,
+    .nav-dropdown.open .caret {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: rgba(10, 10, 10, 0.96);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 8px;
+      min-width: 280px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.25s var(--ease);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      z-index: 2000;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 11px 20px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      opacity: 1;
+    }
+
+    .nav-dropdown-menu a.selected {
+      background: rgba(255,255,255,0.09);
+      color: #fff;
+    }
+
+    /* Divider between items */
+    .nav-dropdown-menu .menu-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 4px 8px;
+    }
+
+    /* ── HAMBURGER + MOBILE MENU ── */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 0; z-index: 1100; }
+    .hamburger span { display: block; height: 2px; background: white; border-radius: 2px; transition: transform 0.35s var(--ease), opacity 0.25s ease; }
+    .hamburger span:nth-child(1) { width: 28px; }
+    .hamburger span:nth-child(2) { width: 20px; }
+    .hamburger span:nth-child(3) { width: 24px; }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 28px; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 28px; }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-family: Inter, sans-serif; font-size: 28px; font-weight: 700; color: white; text-decoration: none; opacity: 0; transform: translateY(18px); transition: opacity 0.4s ease, transform 0.4s var(--ease); }
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.04s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.08s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.12s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.16s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.20s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.24s; }
+    .mobile-menu.open a:nth-child(7) { transition-delay: 0.28s; }
+    .mobile-menu.open a:nth-child(8) { transition-delay: 0.32s; }
+    .mobile-menu.open a:nth-child(9) { transition-delay: 0.36s; }
+    .mobile-menu a:hover { opacity: 0.6 !important; }
+    .mobile-menu-section-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      font-weight: 700;
+      margin-top: 4px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.4s ease, transform 0.4s var(--ease);
+    }
+    .mobile-menu.open .mobile-menu-section-label { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open .mobile-menu-section-label { transition-delay: 0.20s; }
+    .mobile-sub-links { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .mobile-sub-links a { font-size: 18px !important; color: rgba(255,255,255,0.75) !important; }
+
+    /* ── MAIN ── */
+    main {
+      padding-top: 130px;
+      padding-bottom: 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    /* ── REEL + CENTER LAYOUT ── */
+    .experiences-reel-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 200px 1fr 200px;
+      gap: 40px;
+      align-items: stretch;
+      padding: 0 20px;
+      min-height: 650px;
+    }
+
+    .reel-column {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .reel-column::before,
+    .reel-column::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .reel-column::before { top: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%); }
+    .reel-column::after  { bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); }
+
+    /* Each experience has its own reel (shown/hidden by JS) */
+    .reel-set { display: none; }
+    .reel-set.active { display: block; height: 100%; }
+
+    .reel-track {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .reel-track img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      opacity: 0.65;
+      transition: opacity 0.3s ease;
+    }
+    .reel-track img:hover { opacity: 1; }
+
+    .reel-track-down { animation: reelDown 35s linear infinite; }
+    .reel-track-up   { animation: reelUp 35s linear infinite; }
+
+    @keyframes reelDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+    @keyframes reelUp   { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+    /* ── EXPERIENCE PANELS ── */
+    .experiences-center { max-width: 760px; margin: 0 auto; }
+
+    .exp-panel {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    }
+    .exp-panel.active { display: block; }
+    .exp-panel.visible { opacity: 1; transform: none; }
+
+    .exp-panel-eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      border-left: 2px solid rgba(255,255,255,0.2);
+      padding-left: 12px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .exp-panel h2 {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    .exp-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
+      margin-bottom: 36px;
+    }
+
+    .exp-panel p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    .exp-panel p:last-child { margin-bottom: 0; }
+
+    footer { text-align: center; padding: 32px 40px; font-size: 16px; opacity: 0.4; color: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .experiences-reel-layout { grid-template-columns: 1fr; min-height: auto; }
+      .reel-column { position: relative; height: 280px; top: auto; }
+      .experiences-center { max-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      main { padding-top: 110px; }
+      .exp-panel h2 { font-size: 22px; }
+      .exp-panel p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body class="experiences">
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <span class="mobile-menu-section-label">Experiences</span>
+    <div class="mobile-sub-links">
+      <a href="#" data-exp="innovation">Innovation Challenge</a>
+      <a href="#" data-exp="chicago">Chicago</a>
+      <a href="#" data-exp="ta">Teaching Assistant</a>
+      <a href="#" data-exp="miami">Miami</a>
+    </div>
+    <a href="gateway.html">Gateway</a>
+    <a href="interests.html">Interests</a>
+    <a href="yearinreview.html">Year in Review</a>
+  </div>
+
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="assets/logo.png" alt="Aayush Layane logo"></a>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+
+      <!-- Experiences nav dropdown -->
+      <div class="nav-dropdown" id="navDropdown">
+        <button class="nav-dropdown-trigger" id="dropdownTrigger" aria-haspopup="true" aria-expanded="false">
+          Experiences <span class="caret"></span>
+        </button>
+        <div class="nav-dropdown-menu" id="dropdownMenu" role="menu">
+          <a href="#" data-exp="innovation" class="selected" role="menuitem">Innovation Challenge</a>
+          <div class="menu-divider"></div>
+          <a href="#" data-exp="chicago" role="menuitem">Chicago</a>
+          <div class="menu-divider"></div>
+          <a href="#" data-exp="ta" role="menuitem">Teaching Assistant</a>
+          <div class="menu-divider"></div>
+          <a href="#" data-exp="miami" role="menuitem">Miami</a>
+        </div>
+      </div>
+
+      <a href="gateway.html">Gateway</a>
+      <a href="interests.html">Interests</a>
+      <a href="yearinreview.html">Year in Review</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <div class="experiences-reel-layout">
+
+      <!-- ── LEFT REEL (per experience) ── -->
+      <div class="reel-column reel-left">
+
+        <!-- Innovation: placeholder with chi photos until you provide yours -->
+        <div class="reel-set active" id="reel-left-innovation">
+          <div class="reel-track reel-track-down">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp6.jpeg" alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp6.jpeg" alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp6.jpeg" alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp6.jpeg" alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+          </div>
+        </div>
+
+        <!-- Chicago -->
+        <div class="reel-set" id="reel-left-chicago">
+          <div class="reel-track reel-track-down">
+            <img src="assets/chiexp.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg" alt="">
+            <img src="assets/chiexp2.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp4.jpeg" alt="">
+            <img src="assets/chiexp5.jpeg" alt="">
+            <img src="assets/chiexp.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg" alt="">
+            <img src="assets/chiexp2.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp4.jpeg" alt="">
+            <img src="assets/chiexp5.jpeg" alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg" alt="">
+            <img src="assets/chiexp2.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp4.jpeg" alt="">
+            <img src="assets/chiexp5.jpeg" alt="">
+            <img src="assets/chiexp.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg" alt="">
+            <img src="assets/chiexp2.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg" alt="">
+            <img src="assets/chiexp4.jpeg" alt="">
+            <img src="assets/chiexp5.jpeg" alt="">
+          </div>
+        </div>
+
+        <!-- Teaching Assistant: placeholder -->
+        <div class="reel-set" id="reel-left-ta">
+          <div class="reel-track reel-track-down">
+            <img src="assets/chiexp6.jpeg"  alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg"  alt="">
+            <img src="assets/chiexp6.jpeg"  alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg"  alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp6.jpeg"  alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg"  alt="">
+            <img src="assets/chiexp6.jpeg"  alt="">
+            <img src="assets/chiexp13.jpeg" alt="">
+            <img src="assets/chiexp14.jpeg" alt="">
+            <img src="assets/chiexp15.jpeg" alt="">
+            <img src="assets/chiexp16.jpeg" alt="">
+            <img src="assets/chiexp3.jpeg"  alt="">
+          </div>
+        </div>
+
+        <!-- Miami -->
+        <div class="reel-set" id="reel-left-miami">
+          <div class="reel-track reel-track-down">
+            <img src="assets/miaexp.JPEG"   alt="Miami">
+            <img src="assets/miaexp1.JPEG"  alt="Miami">
+            <img src="assets/miaexp2.PNG"   alt="Miami">
+            <img src="assets/miaexp3.jpeg"  alt="Miami">
+            <img src="assets/miaexp4.JPEG"  alt="Miami">
+            <img src="assets/miaexp5.jpeg"  alt="Miami">
+            <img src="assets/miaexp6.jpeg"  alt="Miami">
+            <img src="assets/miaexp7.jpeg"  alt="Miami">
+            <img src="assets/miaexp8.jpeg"  alt="Miami">
+            <img src="assets/miaexp11.JPEG" alt="Miami">
+            <img src="assets/miaexp18.JPEG" alt="Miami">
+            <img src="assets/miaexp19.JPEG" alt="Miami">
+            <!-- duplicates for seamless loop -->
+            <img src="assets/miaexp.JPEG"   alt="Miami">
+            <img src="assets/miaexp1.JPEG"  alt="Miami">
+            <img src="assets/miaexp2.PNG"   alt="Miami">
+            <img src="assets/miaexp3.jpeg"  alt="Miami">
+            <img src="assets/miaexp4.JPEG"  alt="Miami">
+            <img src="assets/miaexp5.jpeg"  alt="Miami">
+            <img src="assets/miaexp6.jpeg"  alt="Miami">
+            <img src="assets/miaexp7.jpeg"  alt="Miami">
+            <img src="assets/miaexp8.jpeg"  alt="Miami">
+            <img src="assets/miaexp11.JPEG" alt="Miami">
+            <img src="assets/miaexp18.JPEG" alt="Miami">
+            <img src="assets/miaexp19.JPEG" alt="Miami">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── CENTER PANELS ── -->
+      <div class="experiences-center">
+
+        <!-- Innovation Challenge -->
+        <div class="exp-panel active" id="panel-innovation">
+          <span class="exp-panel-eyebrow">01 &nbsp;/&nbsp; Innovation</span>
+          <h2>Innovation Challenge 1 — UC MarketHub</h2>
+          <div class="exp-divider"></div>
+          <p>
+            During Innovation Challenge 1, I worked with three classmates to pitch
+            UC MarketHub, a student-focused marketplace for textbooks, lab gear,
+            and dorm items. We started by talking to friends and clubmates about
+            how much unused stuff piles up at semester's end, then drafted a simple
+            problem and solution slide to confirm the pain point.
+          </p>
+          <p>
+            My main jobs were outlining the core features, including verified UC
+            email login, quick photo listing, and a rating system, and turning
+            those ideas into a rough Figma mock-up for our final pitch. The
+            challenge taught me the fundamentals of design thinking, scoping an
+            MVP, gathering quick feedback, and translating that into a clear story
+            for judges.
+          </p>
+          <p>
+            Presenting the deck also gave me a first real taste of public speaking
+            in front of faculty and peers. Most importantly, it showed how
+            engineering ideas intersect with business viability and pushed me to
+            think more deeply about entrepreneurship and product design.
+          </p>
+        </div>
+
+        <!-- Chicago -->
+        <div class="exp-panel" id="panel-chicago">
+          <span class="exp-panel-eyebrow">02 &nbsp;/&nbsp; Honors Experience</span>
+          <h2>Exploring Culture, Architecture and Urban Life in Chicago</h2>
+          <div class="exp-divider"></div>
+          <p>
+            During my self-designed Honors experience, I traveled to Chicago to explore
+            how architecture, culture, and public spaces shape the identity of a major
+            city. As one of the most influential urban centers in the United States,
+            Chicago provided an opportunity to study how engineering, design, and
+            cultural diversity contribute to the character and function of a modern city.
+          </p>
+          <p>
+            Over five days, I visited locations including Navy Pier, Millennium Park,
+            the Magnificent Mile, the Griffin Museum of Science and Industry, Adler
+            Planetarium, and the University of Chicago. I also explored cultural
+            environments such as Chinatown, the German Christmas Market, and the
+            Thanksgiving Parade. Through structured observation, journaling, and
+            photography, I examined how architecture, infrastructure, and community
+            spaces influence daily life and create a sense of place.
+          </p>
+          <p>
+            One of the most memorable aspects of the experience was viewing the Chicago
+            skyline from 360 Chicago and participating in the architecture river tour.
+            These experiences highlighted how the city combines innovation, engineering,
+            and design to address environmental and urban challenges. From iconic
+            skyscrapers to the Chicago Loop and riverfront, I gained a deeper
+            appreciation for how architecture can reflect both the history and
+            ambitions of a city.
+          </p>
+          <p>
+            This experience strengthened my understanding of urban systems, cultural
+            diversity, and the relationship between engineering and the built
+            environment. It also encouraged me to think more critically about how
+            cities are designed and how public spaces shape the experiences of the
+            people who use them. Through this experience, I developed a greater
+            appreciation for the complexity of urban life and the role architecture
+            plays in shaping community identity.
+          </p>
+        </div>
+
+        <!-- Teaching Assistant -->
+        <div class="exp-panel" id="panel-ta">
+          <span class="exp-panel-eyebrow">03 &nbsp;/&nbsp; Leadership &amp; Education</span>
+          <h2>Teaching Assistant</h2>
+          <div class="exp-divider"></div>
+          <p>
+            Details about the Teaching Assistant experience coming soon.
+          </p>
+        </div>
+
+        <!-- Miami -->
+        <div class="exp-panel" id="panel-miami">
+          <span class="exp-panel-eyebrow">04 &nbsp;/&nbsp; Honors Experience</span>
+          <h2>Exploring Culture, Architecture and Urban Life in Miami</h2>
+          <div class="exp-divider"></div>
+          <p>
+            During my self-designed Honors experience, I traveled to Miami to explore
+            how culture, architecture, and environment shape the identity of a major
+            coastal city. Building on my previous experience in Chicago, I wanted to
+            understand how a city influenced by tourism, climate, and Latin American
+            culture develops a unique character through its neighborhoods, public
+            spaces, and urban design.
+          </p>
+          <p>
+            Over seven days, I visited locations including Wynwood Walls, Little
+            Havana, Vizcaya Museum and Gardens, the Miami Design District, Downtown
+            Miami, Brickell, and Key West. I observed how architecture, public art,
+            and cultural traditions contribute to the identity of different
+            communities. Through structured observation, journaling, and photography,
+            I studied how people interact with urban spaces and how environment
+            influences city life.
+          </p>
+          <p>
+            One of the most memorable aspects of the experience was exploring Key
+            West and traveling through the Florida Keys. I also gained a deeper
+            appreciation for Miami's cultural diversity, particularly the influence
+            of Cuban and Latin American communities visible through language, food,
+            art, and everyday life. Locations such as Wynwood and Little Havana
+            demonstrated how culture can shape neighborhoods and create a strong
+            sense of identity.
+          </p>
+          <p>
+            This experience strengthened my cultural awareness and broadened my
+            understanding of how cities develop in different ways. Comparing Miami
+            to Chicago helped me recognize that architecture, environment, and
+            culture all play important roles in shaping urban life. It also
+            increased my independence and confidence by challenging me to navigate
+            new environments, adapt to unfamiliar situations, and engage more
+            thoughtfully with the communities around me.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- ── RIGHT REEL (per experience) ── -->
+      <div class="reel-column reel-right">
+
+        <!-- Innovation: placeholder -->
+        <div class="reel-set active" id="reel-right-innovation">
+          <div class="reel-track reel-track-up">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+          </div>
+        </div>
+
+        <!-- Chicago -->
+        <div class="reel-set" id="reel-right-chicago">
+          <div class="reel-track reel-track-up">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+            <img src="assets/chiexp7.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp10.jpeg" alt="">
+            <img src="assets/chiexp11.jpeg" alt="">
+            <img src="assets/chiexp12.jpeg" alt="">
+          </div>
+        </div>
+
+        <!-- Teaching Assistant: placeholder -->
+        <div class="reel-set" id="reel-right-ta">
+          <div class="reel-track reel-track-up">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp4.jpeg"  alt="">
+            <img src="assets/chiexp5.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg"  alt="">
+            <img src="assets/chiexp2.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp4.jpeg"  alt="">
+            <img src="assets/chiexp5.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg"  alt="">
+            <img src="assets/chiexp2.jpeg"  alt="">
+            <!-- Duplicate block to prevent gaps -->
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp4.jpeg"  alt="">
+            <img src="assets/chiexp5.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg"  alt="">
+            <img src="assets/chiexp2.jpeg"  alt="">
+            <img src="assets/chiexp8.jpeg"  alt="">
+            <img src="assets/chiexp9.jpeg"  alt="">
+            <img src="assets/chiexp4.jpeg"  alt="">
+            <img src="assets/chiexp5.jpeg"  alt="">
+            <img src="assets/chiexp1.jpeg"  alt="">
+            <img src="assets/chiexp2.jpeg"  alt="">
+          </div>
+        </div>
+
+        <!-- Miami -->
+        <div class="reel-set" id="reel-right-miami">
+          <div class="reel-track reel-track-up">
+            <img src="assets/miaexp9.jpeg"  alt="Miami">
+            <img src="assets/miaexp10.jpeg" alt="Miami">
+            <img src="assets/miaexp12.jpeg" alt="Miami">
+            <img src="assets/miaexp13.jpeg" alt="Miami">
+            <img src="assets/miaexp14.jpeg" alt="Miami">
+            <img src="assets/miaexp15.jpeg" alt="Miami">
+            <img src="assets/miaexp16.jpeg" alt="Miami">
+            <img src="assets/miaexp17.jpeg" alt="Miami">
+            <img src="assets/miaexp20.JPEG" alt="Miami">
+            <img src="assets/miaexp21.JPEG" alt="Miami">
+            <img src="assets/miaexp22.JPEG" alt="Miami">
+            <img src="assets/miaexp23.png"  alt="Miami">
+            <!-- duplicates for seamless loop -->
+            <img src="assets/miaexp9.jpeg"  alt="Miami">
+            <img src="assets/miaexp10.jpeg" alt="Miami">
+            <img src="assets/miaexp12.jpeg" alt="Miami">
+            <img src="assets/miaexp13.jpeg" alt="Miami">
+            <img src="assets/miaexp14.jpeg" alt="Miami">
+            <img src="assets/miaexp15.jpeg" alt="Miami">
+            <img src="assets/miaexp16.jpeg" alt="Miami">
+            <img src="assets/miaexp17.jpeg" alt="Miami">
+            <img src="assets/miaexp20.JPEG" alt="Miami">
+            <img src="assets/miaexp21.JPEG" alt="Miami">
+            <img src="assets/miaexp22.JPEG" alt="Miami">
+            <img src="assets/miaexp23.png"  alt="Miami">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer><p>© 2026 Aayush Layane</p></footer>
+
+  <script>
+    const EXPERIENCES = ['innovation', 'chicago', 'ta', 'miami'];
+    let currentExp = 'innovation';
+
+    function switchExp(id) {
+      if (!EXPERIENCES.includes(id)) return;
+      currentExp = id;
+
+      // Switch panels
+      document.querySelectorAll('.exp-panel').forEach(p => {
+        p.classList.remove('active', 'visible');
+      });
+      const panel = document.getElementById('panel-' + id);
+      panel.classList.add('active');
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('visible')));
+
+      // Switch reel sets
+      document.querySelectorAll('.reel-set').forEach(r => r.classList.remove('active'));
+      document.getElementById('reel-left-'  + id).classList.add('active');
+      document.getElementById('reel-right-' + id).classList.add('active');
+
+      // Update menu highlight
+      document.querySelectorAll('.nav-dropdown-menu a').forEach(a => {
+        a.classList.toggle('selected', a.dataset.exp === id);
+      });
+    }
+
+    // Nav dropdown toggle (click to open/close, hover also works via CSS)
+    const navDropdown   = document.getElementById('navDropdown');
+    const dropdownTrigger = document.getElementById('dropdownTrigger');
+
+    dropdownTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navDropdown.classList.toggle('open');
+      dropdownTrigger.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', () => {
+      navDropdown.classList.remove('open');
+      dropdownTrigger.setAttribute('aria-expanded', false);
+    });
+
+    // Dropdown menu item clicks
+    document.querySelectorAll('.nav-dropdown-menu a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchExp(a.dataset.exp);
+        navDropdown.classList.remove('open');
+      });
+    });
+
+    // Mobile sub-link clicks
+    document.querySelectorAll('.mobile-sub-links a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchExp(a.dataset.exp);
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Show first panel on load
+    switchExp('innovation');
+
+    // ── HAMBURGER ──
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+  </script>
+
+</body>
+</html>

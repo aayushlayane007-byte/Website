@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gateway – Aayush Layane</title>
+  <meta name="description" content="Gateway reflection by Aayush Layane — a personal essay on perseverance, leadership, and growth through engineering challenges.">
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; width: 100%; }
+    :root { --ease-out-expo: cubic-bezier(0.16,1,0.3,1); }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: Inter, sans-serif;
+    }
+
+    /* ── HEADER (mirrors index.html) ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px; box-sizing: border-box;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+    }
+    .logo { perspective: 800px; }
+    .logo img {
+      height: 96px; width: auto; display: block;
+      transition: transform 1.5s ease; transform-style: preserve-3d;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    .logo img:hover { transform: rotateY(360deg); }
+    @keyframes logoPulse {
+      0%   { filter: drop-shadow(0 0 0px rgba(220,230,255,0)); }
+      50%  { filter: drop-shadow(0 0 40px rgba(200,220,255,1)) drop-shadow(0 0 80px rgba(160,200,255,0.9)) drop-shadow(0 0 120px rgba(120,180,255,0.8)); }
+      100% { filter: drop-shadow(0 0 0px rgba(220,230,255,0)); }
+    }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a { color: white; text-decoration: none; font-family: Inter, sans-serif; font-size: 24px; transition: opacity 0.2s ease; }
+    nav a:hover { opacity: 0.6; }
+    nav a[href="gateway.html"] { opacity: 0.5; pointer-events: none; }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 0; z-index: 1100; }
+    .hamburger span { display: block; height: 2px; background: white; border-radius: 2px; transition: transform 0.35s var(--ease-out-expo), opacity 0.25s ease; }
+    .hamburger span:nth-child(1) { width: 28px; }
+    .hamburger span:nth-child(2) { width: 20px; }
+    .hamburger span:nth-child(3) { width: 24px; }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 28px; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 28px; }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-family: Inter, sans-serif; font-size: 32px; font-weight: 700; color: white; text-decoration: none; opacity: 0; transform: translateY(18px); transition: opacity 0.4s ease, transform 0.4s var(--ease-out-expo); }
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.20s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu a:hover { opacity: 0.6 !important; }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 160px 40px 100px;
+      box-sizing: border-box;
+    }
+
+    /* Page title */
+    .page-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+    }
+
+    .page-heading {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 48px;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Divider line */
+    .page-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+      margin-bottom: 64px;
+    }
+
+    /* Essay sections */
+    .essay-section {
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .essay-section.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      border-left: 2px solid rgba(255,255,255,0.2);
+      padding-left: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .section-body {
+      font-size: 17px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.72);
+      font-weight: 400;
+    }
+
+    /* Section number badge */
+    .section-number {
+      font-size: 88px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      letter-spacing: -0.04em;
+      position: absolute;
+      top: -28px;
+      left: -12px;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 40px;
+      font-size: 16px;
+      opacity: 0.4;
+      color: white;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      main { padding: 140px 24px 80px; }
+      .page-heading { font-size: 36px; }
+      .section-heading { font-size: 22px; }
+      .section-body { font-size: 16px; }
+      .section-number { font-size: 64px; }
+    }
+  </style>
+</head>
+<body class="gateway">
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="experiences.html">Experiences</a>
+    <a href="gateway.html">Gateway</a>
+    <a href="interests.html">Interests</a>
+    <a href="yearinreview.html">Year in Review</a>
+  </div>
+
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="assets/logo.png" alt="Aayush Layane logo"></a>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="gateway.html">Gateway</a>
+      <a href="interests.html">Interests</a>
+      <a href="yearinreview.html">Year in Review</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+
+    <p class="page-title">Reflection Essay</p>
+    <h1 class="page-heading">Gateway</h1>
+    <div class="page-divider"></div>
+
+    <!-- Section 1: What? -->
+    <div class="essay-section" id="s1">
+      <span class="section-label">01 &nbsp;/&nbsp; Experience</span>
+      <h2 class="section-heading">
+        <span class="section-number">01</span>
+        What?
+      </h2>
+      <p class="section-body">
+        The most salient experience that I have had in the last year is when I had to face a big challenge while working on an engineering group project. We were supposed to design and test our hypothesis through an experiment using a system within a tight timeline. As we advanced in the project, we started to experience unforeseen setbacks, such as experimental design flaws and software incompatibility. It came with frustration for the team, with rising tensions within. The tight schedule for project completion meant I needed to step in: mediate the discussions, redistribute the workload, and help with troubleshooting of specific technical issues so that the work could stay on schedule. Besides learning new software tools and techniques, it taught me how important improving our workflow was and really helped us regain momentum.
+      </p>
+    </div>
+
+    <!-- Section 2: Personal Growth -->
+    <div class="essay-section" id="s2">
+      <span class="section-label">02 &nbsp;/&nbsp; Identity</span>
+      <h2 class="section-heading">
+        <span class="section-number">02</span>
+        Personal Growth
+      </h2>
+      <p class="section-body">
+        That was a true test of my perseverance and my problem-solving skills, both of which are considered some of my strengths. Being an Asian Indian and an engineering student, I had always been brought up to meet any challenge with resilience and in a solution-oriented way. My prudence helped me to keep my head above water and consider various options before making any major decision. My leadership role also helped me through, as I could foster more spirit among my teammates during the setbacks, making sure everyone remained involved in the process. My identity as a mechanical engineering student also played into this, as I drew on my technical knowledge and analytical thinking to navigate complex design issues. In this case, this experience further helped me become more patient and more empathetic because the only way that such an ideal team could be reaped is to try to understand different standpoints and to work any problem out constructively.
+      </p>
+    </div>
+
+    <!-- Section 3: So What? -->
+    <div class="essay-section" id="s3">
+      <span class="section-label">03 &nbsp;/&nbsp; Lessons</span>
+      <h2 class="section-heading">
+        <span class="section-number">03</span>
+        So What?
+      </h2>
+      <p class="section-body">
+        From this, I learned that anything can be overcome by adaptability and teamwork. I felt like the challenges kept piling on, but at some point, setbacks always occur in any process of problem-solving. With persistence and a positive attitude, I helped my team get through the difficulties and successfully complete the project. That furthered my belief in collaboration, strategic planning, and effective communication in pursuit of a common objective. I also learned the importance of emotional intelligence in leadership: keeping the team motivated was just as important as solving the technical issues at hand.
+      </p>
+    </div>
+
+    <!-- Section 4: What's Next? -->
+    <div class="essay-section" id="s4">
+      <span class="section-label">04 &nbsp;/&nbsp; Future</span>
+      <h2 class="section-heading">
+        <span class="section-number">04</span>
+        What's Next?
+      </h2>
+      <p class="section-body">
+        I plan to bring this learning into academics and extracurriculars during college. As a mechanical engineering student, I am very likely to encounter several intricate design problems that require critical thinking and teamwork. Problem-solving strategies developed during this experience will be applied in solving engineering projects and collaborative research. I will also continue developing my leadership skills by encouraging open communication and maintaining productive group dynamics. My self-confidence in dealing with challenges has been strengthened with this experience, and now I am better equipped to face all the coming challenges on both academic and professional fronts. I will continuously look for opportunities to mentor and support others who may face similar challenges in group projects, applying the lessons learned about leadership and teamwork. In so doing, I hope to contribute to a collaborative and innovative learning environment in my college experience and beyond.
+      </p>
+    </div>
+
+  </main>
+
+  <footer><p>© 2026 Aayush Layane</p></footer>
+
+  <script>
+    // ── HAMBURGER ──
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── SCROLL REVEAL ──
+    const sections = document.querySelectorAll('.essay-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
