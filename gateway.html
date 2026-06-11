@@ -21,6 +21,12 @@
       font-family: Inter, sans-serif;
     }
 
+    body.gateway {
+      background-size: contain;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
     /* ── HEADER (mirrors index.html) ── */
     header {
       position: fixed; top: 0; left: 0; right: 0;
@@ -76,12 +82,7 @@
 
     /* Page title */
     .page-title {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 12px;
+      display: none;
     }
 
     .page-heading {
@@ -95,6 +96,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-align: center;
     }
 
     /* Divider line */
@@ -118,15 +120,7 @@
     }
 
     .section-label {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      border-left: 2px solid rgba(255,255,255,0.2);
-      padding-left: 12px;
-      margin-bottom: 16px;
+      display: none;
     }
 
     .section-heading {
@@ -136,6 +130,7 @@
       color: #fff;
       margin-bottom: 20px;
       position: relative;
+      text-align: center;
     }
 
     .section-body {
@@ -147,16 +142,7 @@
 
     /* Section number badge */
     .section-number {
-      font-size: 88px;
-      font-weight: 900;
-      color: rgba(255,255,255,0.04);
-      letter-spacing: -0.04em;
-      position: absolute;
-      top: -28px;
-      left: -12px;
-      line-height: 1;
-      user-select: none;
-      pointer-events: none;
+      display: none;
     }
 
     footer {

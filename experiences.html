@@ -30,6 +30,15 @@
       position: relative;
     }
 
+    .nav-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      right: -20px;
+      height: 22px;
+    }
+
     .nav-dropdown-trigger {
       color: white;
       font-family: Inter, sans-serif;
@@ -65,7 +74,7 @@
     }
 
     .nav-dropdown:hover .caret,
-    .nav-dropdown.open .caret {
+    .nav-dropdown:focus-within .caret {
       transform: rotate(180deg);
     }
 
@@ -89,7 +98,7 @@
     }
 
     .nav-dropdown:hover .nav-dropdown-menu,
-    .nav-dropdown.open .nav-dropdown-menu {
+    .nav-dropdown:focus-within .nav-dropdown-menu {
       opacity: 1;
       pointer-events: all;
       transform: translateX(-50%) translateY(0);
@@ -169,10 +178,12 @@
 
     /* ── MAIN ── */
     main {
-      padding-top: 130px;
-      padding-bottom: 60px;
+      padding-top: 158px;
+      padding-bottom: 8px;
       box-sizing: border-box;
-      min-height: 100vh;
+      height: 100vh;
+      min-height: 0;
+      overflow: hidden;
     }
 
     /* ── REEL + CENTER LAYOUT ── */
@@ -184,7 +195,18 @@
       gap: 40px;
       align-items: stretch;
       padding: 0 20px;
-      min-height: 650px;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .experiences-reel-layout.no-photos {
+      grid-template-columns: minmax(0, 760px);
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    .experiences-reel-layout.no-photos .reel-column {
+      display: none;
     }
 
     .reel-column {
@@ -225,14 +247,32 @@
     }
     .reel-track img:hover { opacity: 1; }
 
-    .reel-track-down { animation: reelDown 35s linear infinite; }
-    .reel-track-up   { animation: reelUp 35s linear infinite; }
+    .reel-track-down { animation: reelDown 90s linear infinite; }
+    .reel-track-up   { animation: reelUp 90s linear infinite; }
 
     @keyframes reelDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
     @keyframes reelUp   { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 
     /* ── EXPERIENCE PANELS ── */
-    .experiences-center { max-width: 760px; margin: 0 auto; }
+    .experiences-center {
+      max-width: 760px;
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      overflow-y: auto;
+      padding-right: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.28) transparent;
+    }
+
+    .experiences-center::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .experiences-center::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.28);
+      border-radius: 999px;
+    }
 
     .exp-panel {
       display: none;
@@ -244,15 +284,7 @@
     .exp-panel.visible { opacity: 1; transform: none; }
 
     .exp-panel-eyebrow {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      border-left: 2px solid rgba(255,255,255,0.2);
-      padding-left: 12px;
-      margin-bottom: 14px;
-      display: block;
+      display: none;
     }
 
     .exp-panel h2 {
@@ -287,6 +319,22 @@
       .experiences-reel-layout { grid-template-columns: 1fr; min-height: auto; }
       .reel-column { position: relative; height: 280px; top: auto; }
       .experiences-center { max-width: 100%; }
+      body.experiences {
+        height: auto;
+        overflow-y: auto;
+      }
+      main {
+        height: auto;
+        overflow: visible;
+      }
+      .experiences-reel-layout {
+        height: auto;
+      }
+      .experiences-center {
+        height: auto;
+        overflow: visible;
+        padding-right: 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -294,7 +342,10 @@
       nav { display: none; }
       .hamburger { display: flex; }
       .mobile-menu { display: flex; }
-      main { padding-top: 110px; }
+      main {
+        padding-top: 133px;
+        padding-bottom: 8px;
+      }
       .exp-panel h2 { font-size: 22px; }
       .exp-panel p { font-size: 16px; }
     }
@@ -352,41 +403,10 @@
   </header>
 
   <main>
-    <div class="experiences-reel-layout">
+    <div class="experiences-reel-layout no-photos">
 
       <!-- ── LEFT REEL (per experience) ── -->
       <div class="reel-column reel-left">
-
-        <!-- Innovation: placeholder with chi photos until you provide yours -->
-        <div class="reel-set active" id="reel-left-innovation">
-          <div class="reel-track reel-track-down">
-            <img src="assets/chiexp3.jpeg" alt="">
-            <img src="assets/chiexp6.jpeg" alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg" alt="">
-            <img src="assets/chiexp6.jpeg" alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <!-- Duplicate block to prevent gaps -->
-            <img src="assets/chiexp3.jpeg" alt="">
-            <img src="assets/chiexp6.jpeg" alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg" alt="">
-            <img src="assets/chiexp6.jpeg" alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-          </div>
-        </div>
 
         <!-- Chicago -->
         <div class="reel-set" id="reel-left-chicago">
@@ -416,37 +436,6 @@
             <img src="assets/chiexp3.jpeg" alt="">
             <img src="assets/chiexp4.jpeg" alt="">
             <img src="assets/chiexp5.jpeg" alt="">
-          </div>
-        </div>
-
-        <!-- Teaching Assistant: placeholder -->
-        <div class="reel-set" id="reel-left-ta">
-          <div class="reel-track reel-track-down">
-            <img src="assets/chiexp6.jpeg"  alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg"  alt="">
-            <img src="assets/chiexp6.jpeg"  alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg"  alt="">
-            <!-- Duplicate block to prevent gaps -->
-            <img src="assets/chiexp6.jpeg"  alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg"  alt="">
-            <img src="assets/chiexp6.jpeg"  alt="">
-            <img src="assets/chiexp13.jpeg" alt="">
-            <img src="assets/chiexp14.jpeg" alt="">
-            <img src="assets/chiexp15.jpeg" alt="">
-            <img src="assets/chiexp16.jpeg" alt="">
-            <img src="assets/chiexp3.jpeg"  alt="">
           </div>
         </div>
 
@@ -612,37 +601,6 @@
       <!-- ── RIGHT REEL (per experience) ── -->
       <div class="reel-column reel-right">
 
-        <!-- Innovation: placeholder -->
-        <div class="reel-set active" id="reel-right-innovation">
-          <div class="reel-track reel-track-up">
-            <img src="assets/chiexp10.jpeg" alt="">
-            <img src="assets/chiexp11.jpeg" alt="">
-            <img src="assets/chiexp12.jpeg" alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp7.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp10.jpeg" alt="">
-            <img src="assets/chiexp11.jpeg" alt="">
-            <img src="assets/chiexp12.jpeg" alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp7.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <!-- Duplicate block to prevent gaps -->
-            <img src="assets/chiexp10.jpeg" alt="">
-            <img src="assets/chiexp11.jpeg" alt="">
-            <img src="assets/chiexp12.jpeg" alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp7.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp10.jpeg" alt="">
-            <img src="assets/chiexp11.jpeg" alt="">
-            <img src="assets/chiexp12.jpeg" alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp7.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-          </div>
-        </div>
-
         <!-- Chicago -->
         <div class="reel-set" id="reel-right-chicago">
           <div class="reel-track reel-track-up">
@@ -671,37 +629,6 @@
             <img src="assets/chiexp10.jpeg" alt="">
             <img src="assets/chiexp11.jpeg" alt="">
             <img src="assets/chiexp12.jpeg" alt="">
-          </div>
-        </div>
-
-        <!-- Teaching Assistant: placeholder -->
-        <div class="reel-set" id="reel-right-ta">
-          <div class="reel-track reel-track-up">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp4.jpeg"  alt="">
-            <img src="assets/chiexp5.jpeg"  alt="">
-            <img src="assets/chiexp1.jpeg"  alt="">
-            <img src="assets/chiexp2.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp4.jpeg"  alt="">
-            <img src="assets/chiexp5.jpeg"  alt="">
-            <img src="assets/chiexp1.jpeg"  alt="">
-            <img src="assets/chiexp2.jpeg"  alt="">
-            <!-- Duplicate block to prevent gaps -->
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp4.jpeg"  alt="">
-            <img src="assets/chiexp5.jpeg"  alt="">
-            <img src="assets/chiexp1.jpeg"  alt="">
-            <img src="assets/chiexp2.jpeg"  alt="">
-            <img src="assets/chiexp8.jpeg"  alt="">
-            <img src="assets/chiexp9.jpeg"  alt="">
-            <img src="assets/chiexp4.jpeg"  alt="">
-            <img src="assets/chiexp5.jpeg"  alt="">
-            <img src="assets/chiexp1.jpeg"  alt="">
-            <img src="assets/chiexp2.jpeg"  alt="">
           </div>
         </div>
 
@@ -745,11 +672,15 @@
 
   <script>
     const EXPERIENCES = ['innovation', 'chicago', 'ta', 'miami'];
+    const PHOTO_EXPERIENCES = new Set(['chicago', 'miami']);
+    const experienceLayout = document.querySelector('.experiences-reel-layout');
+    const experienceCenter = document.querySelector('.experiences-center');
     let currentExp = 'innovation';
 
     function switchExp(id) {
       if (!EXPERIENCES.includes(id)) return;
       currentExp = id;
+      const hasPhotos = PHOTO_EXPERIENCES.has(id);
 
       // Switch panels
       document.querySelectorAll('.exp-panel').forEach(p => {
@@ -758,11 +689,15 @@
       const panel = document.getElementById('panel-' + id);
       panel.classList.add('active');
       requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('visible')));
+      experienceCenter.scrollTop = 0;
 
       // Switch reel sets
+      experienceLayout.classList.toggle('no-photos', !hasPhotos);
       document.querySelectorAll('.reel-set').forEach(r => r.classList.remove('active'));
-      document.getElementById('reel-left-'  + id).classList.add('active');
-      document.getElementById('reel-right-' + id).classList.add('active');
+      if (hasPhotos) {
+        document.getElementById('reel-left-'  + id).classList.add('active');
+        document.getElementById('reel-right-' + id).classList.add('active');
+      }
 
       // Update menu highlight
       document.querySelectorAll('.nav-dropdown-menu a').forEach(a => {
@@ -770,18 +705,23 @@
       });
     }
 
-    // Nav dropdown toggle (click to open/close, hover also works via CSS)
+    // Nav dropdown opens on hover/focus.
     const navDropdown   = document.getElementById('navDropdown');
     const dropdownTrigger = document.getElementById('dropdownTrigger');
 
-    dropdownTrigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = navDropdown.classList.toggle('open');
-      dropdownTrigger.setAttribute('aria-expanded', isOpen);
+    navDropdown.addEventListener('mouseenter', () => {
+      dropdownTrigger.setAttribute('aria-expanded', true);
     });
 
-    document.addEventListener('click', () => {
-      navDropdown.classList.remove('open');
+    navDropdown.addEventListener('mouseleave', () => {
+      dropdownTrigger.setAttribute('aria-expanded', false);
+    });
+
+    navDropdown.addEventListener('focusin', () => {
+      dropdownTrigger.setAttribute('aria-expanded', true);
+    });
+
+    navDropdown.addEventListener('focusout', () => {
       dropdownTrigger.setAttribute('aria-expanded', false);
     });
 
@@ -790,7 +730,7 @@
       a.addEventListener('click', (e) => {
         e.preventDefault();
         switchExp(a.dataset.exp);
-        navDropdown.classList.remove('open');
+        dropdownTrigger.setAttribute('aria-expanded', false);
       });
     });
 
