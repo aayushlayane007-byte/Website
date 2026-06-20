@@ -1,36 +1,424 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Year in Review</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year in Review - Aayush Layane</title>
 
-<link rel="preconnect" href="https://rsms.me/">
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-<link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="year">
-
-  <header>
-  <div class="logo">
-    <a href="index.html">
-      <img src="assets/logo.png" alt="Aayush Layane logo">
-    </a>
-  </div>
-
-  <nav>
+  <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="experiences.html">Experiences</a>
     <a href="gateway.html">Gateway</a>
     <a href="interests.html">Interests</a>
     <a href="yearinreview.html">Year in Review</a>
-  </nav>
-</header>
+  </div>
 
-<main>
-  <h1>Year in Review</h1>
-</main>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/logo.png" alt="Aayush Layane logo">
+      </a>
+    </div>
 
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="gateway.html">Gateway</a>
+      <a href="interests.html">Interests</a>
+      <div class="nav-dropdown" id="yearDropdown">
+        <button class="nav-dropdown-trigger" id="yearDropdownTrigger" aria-haspopup="true" aria-expanded="false">
+          Year in Review <span class="caret"></span>
+        </button>
+        <div class="nav-dropdown-menu" id="yearDropdownMenu" role="menu">
+          <a href="#" data-year="2024-2025" class="selected" role="menuitem">2024-2025</a>
+          <a href="#" data-year="2025-2026" role="menuitem">2025-2026</a>
+        </div>
+      </div>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="year-review">
+    <h1 id="reviewTitle">Year-in-Review: 2024-2025</h1>
+
+    <section class="year-panel active" id="review-2024-2025">
+      <p class="prompt">
+        <strong>Prompt chosen:</strong> What specific experiences in the past year
+        have had the most impact on your personal, academic, or professional goals
+        and life trajectory? Which future experiences will further encourage this
+        growth? Please articulate specific academic and/or professional goals for
+        the next year.
+      </p>
+
+    <section class="review-section">
+      <p>
+        Looking back on my first year at the University of Cincinnati, I think
+        the biggest change was that I started to understand what engineering
+        looks like outside of just classes and assignments. I came into UC
+        interested in mechanical engineering, but I was still figuring out what
+        areas I liked, how I worked best, and what kind of experiences would help
+        me grow. A few experiences from this year helped me see that I learn best
+        when I am actually building, testing, presenting, or working through a
+        real problem instead of only studying the theory behind it.
+      </p>
+    </section>
+
+    <section class="review-section">
+      <h2>1. Bearcat Motorsports</h2>
+      <p>
+        Bearcat Motorsports was one of my first chances to see an engineering
+        project that was bigger than a class assignment. At first, it was
+        honestly a little intimidating because many students already seemed
+        comfortable with the car, the tools, and the design process. I had some
+        experience with SolidWorks, but being around a Formula SAE team showed me
+        that creating a design is only one part of engineering.
+      </p>
+      <p>
+        What stood out to me most was how many details go into even one
+        component. A part cannot just look correct in CAD; it has to fit with the
+        rest of the system, be manufacturable, and make sense for the actual use
+        of the vehicle. I also saw how much feedback matters. Even if I did not
+        always feel like the most experienced person in the room, I learned by
+        watching how students explained their decisions, questioned each other's
+        designs, and improved their work over time. This experience helped me
+        become more comfortable being around technical discussions and made me
+        want to keep building my own design and analysis skills.
+      </p>
+    </section>
+
+    <section class="review-section">
+      <h2>2. ENED 1120 Autonomous Robot Project</h2>
+      <p>
+        The ENED 1120 autonomous robot project was another important experience
+        because it gave me a more structured introduction to engineering
+        problem-solving. Our Lego Mindstorms robot had to sort mixed waste
+        streams for a mobile TDP plant while also navigating a five-degree grade.
+        The project had budget limits, checkpoints, and design deadlines, so it
+        forced our team to make decisions instead of endlessly changing the
+        design.
+      </p>
+      <p>
+        I was most interested in the mechanical side of the project, especially
+        thinking about how the lift arm would work repeatedly without using too
+        much power or becoming unreliable. The robot completed seven out of ten
+        autonomous runs, which was not perfect, but it showed me how testing and
+        iteration can improve a design. This project also helped me realize that
+        I enjoy work that combines mechanical design, coding, testing, and
+        practical constraints. It made me more interested in learning simulation
+        tools like ANSYS and COMSOL because I wanted to better understand how
+        designs behave before they are actually built.
+      </p>
+    </section>
+
+    <section class="review-section">
+      <h2>3. UC MarketHub Innovation Challenge</h2>
+      <p>
+        The UC MarketHub Innovation Challenge helped me grow in a different way.
+        Instead of focusing only on the technical side of an idea, I had to think
+        about how to explain the value of the idea to other people. Pitching an
+        online marketplace for students required me to take a simple concept and
+        turn it into a clear story with a problem, solution, and potential
+        impact.
+      </p>
+      <p>
+        This experience taught me that communication is a major part of turning
+        an idea into something useful. I had to think about what the audience
+        would care about, how to make the idea practical, and how to explain
+        benefits such as reducing resale waste and helping students save money.
+        It also made me more interested in the business side of engineering
+        because I saw that good ideas need more than technical logic; they also
+        need clear presentation, user understanding, and a reason for people to
+        care.
+      </p>
+    </section>
+
+    <section class="review-section">
+      <h2>Cumulative Growth</h2>
+      <p>
+        Across these experiences, I noticed that I started becoming more
+        comfortable with uncertainty. At the start of the year, I felt like I
+        needed to know exactly what I was doing before getting involved. Over
+        time, I learned that a lot of growth comes from entering situations where
+        I am not fully confident yet and then learning through feedback,
+        mistakes, and repetition.
+      </p>
+      <p>
+        I also became more aware of how broad mechanical engineering can be. It
+        is not only about designing parts or solving equations; it also involves
+        testing, communication, teamwork, business thinking, and understanding
+        how one decision affects a larger system. This helped me see that I am
+        most interested in engineering work that connects technical
+        problem-solving with real applications.
+      </p>
+      <p>
+        Personally, my first year also taught me how important it is to manage
+        my time and energy. Balancing coursework, projects, involvement, and
+        adjusting to college life required me to become more organized. I started
+        using tools like Notion and Reclaim to plan my work, but the bigger
+        lesson was learning how to prioritize and stay consistent even when
+        things felt busy.
+      </p>
+    </section>
+
+    <section class="review-section">
+      <h2>Goals for 2025-2026</h2>
+      <p>
+        <strong>Technical depth:</strong> Over the next year, I want to continue
+        developing stronger technical skills in design, simulation, and analysis.
+        My goal is to complete COMSOL's Structural Mechanics self-paced course
+        and apply what I learn to a mechanical design or analysis project. I also
+        want to complete at least one MATLAB or Simulink mini-project related to
+        vibration analysis and use it as an honors showcase or portfolio piece.
+      </p>
+      <p>
+        <strong>Leadership:</strong> I want to become more active in leadership
+        roles within engineering and campus organizations. In Bearcat
+        Motorsports, I hope to mentor newer students on CAD practices and
+        contribute more confidently to design discussions. I also want to explore
+        opportunities such as CEAS Tribunal or other student leadership positions
+        where I can better understand how decisions are made at the college
+        level.
+      </p>
+      <p>
+        <strong>Personal effectiveness:</strong> I want to continue developing
+        habits that help me reflect and improve consistently. One specific goal
+        is to keep a short weekly reflection log where I review what I learned,
+        what I struggled with, and what I need to adjust. This connects directly
+        to the purpose of the UHP learning portfolio because it encourages me to
+        treat each experience as part of a larger growth process.
+      </p>
+      <p>
+        By this time next year, I hope to have a clearer sense of my direction
+        as a mechanical engineering student. I want to keep building technical
+        skills, stay involved in meaningful projects, and become better at
+        connecting design, analysis, communication, and leadership. My first year
+        at UC showed me that every experience does not need to be perfect to be
+        valuable; it just needs to teach me something I can carry into the next
+        one.
+      </p>
+    </section>
+    </section>
+
+    <section class="year-panel" id="review-2025-2026">
+      <p class="prompt">
+        <strong>Prompt chosen:</strong> How have you grown as a developing
+        professional within your field or fields of interest in the past year?
+        Consider skills such as communication, collaboration, critical thinking,
+        leadership, professionalism, or navigating different perspectives. Using
+        specific examples, how have your experiences - academic, co-curricular,
+        work, research, etc. - contributed to this growth? What strengths have
+        you continued to build, and what areas would you like to develop further
+        over the upcoming year?
+      </p>
+
+      <section class="review-section">
+        <p>
+          Looking back on this past year, I can see that my professional growth
+          came from being placed in different kinds of environments: work,
+          teaching, research, and Honors experiences. At the beginning of the
+          year, I was mainly focused on gaining experience, building my resume,
+          and becoming more technically skilled. By the end of the year, I
+          started thinking more carefully about what kinds of experiences
+          actually fit my strengths, interests, and long-term goals.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>1. Southland Holdings</h2>
+        <p>
+          My Project Engineering Co-op at Southland Holdings was one of the most
+          important professional experiences of my year. I tracked over 100
+          submittals, reviewed construction drawings using Bluebeam and AutoCAD,
+          and worked with large specification documents. This helped me
+          understand how much professional engineering work depends on
+          organization, documentation, and clear communication.
+        </p>
+        <p>
+          One of the hardest parts of the co-op was not always knowing exactly
+          what was expected of me or how productive I was supposed to be. That
+          taught me that structure is not always given in a workplace. Sometimes,
+          I have to create it by asking better questions, clarifying priorities,
+          and organizing my own work. One project I was especially proud of was
+          using Python and AI-assisted methods to extract and organize
+          information from 2,000+ page specification documents. The project
+          received strong feedback, including from the Vice President of Water
+          Resources, which showed me that technical skills like coding and
+          automation can create real value when applied to practical problems.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>2. Peer Teaching Assistant</h2>
+        <p>
+          My role as a Peer Teaching Assistant for Engineering Design Thinking
+          helped me grow in communication and leadership. I coached students in
+          calculus, physics, and problem-solving, helped with grading and review
+          sessions, and supported exams for a large group of students. Teaching
+          made me more confident in my own knowledge because I had to explain
+          concepts clearly to students with different levels of understanding.
+        </p>
+        <p>
+          This role also helped me become more comfortable leading a room. I
+          learned that communication is not just about knowing the answer, but
+          about breaking down a problem in a way that actually helps someone else
+          understand it.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>3. Undergraduate Research</h2>
+        <p>
+          My undergraduate research work with Metasonics helped me build more
+          technical depth. I worked on a 2-D pressure acoustics model in COMSOL,
+          ran frequency sweeps, and compared simulation results with analytical
+          resonances. This was challenging because I had to learn new tools,
+          understand the theory, and work through unclear results.
+        </p>
+        <p>
+          Research made me more interested in technical work because it showed
+          me how theory, simulation, and validation connect. It also taught me
+          patience with open-ended problems, where there is not always a clear
+          path to the answer.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>4. Chicago and Miami</h2>
+        <p>
+          My self-designed Honors experiences in Chicago and Miami helped me grow
+          in a different way. I planned both trips for groups of eight people,
+          balancing cost, time, quality, activities, and logistics. I genuinely
+          enjoy exploring new places, but these trips also showed me that I am
+          good at planning under constraints and optimizing different factors at
+          once.
+        </p>
+        <p>
+          Chicago and Miami also made me more open-minded. Both cities showed me
+          how architecture, culture, public spaces, and environment shape the way
+          people experience a place. These experiences reminded me that
+          professional growth does not only happen in classrooms or workplaces.
+          It also comes from learning how to observe, adapt, and understand
+          different perspectives.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>Cumulative Growth</h2>
+        <p>
+          Across these experiences, I built strengths in communication,
+          organization, adaptability, technical problem-solving, and independence.
+          Southland helped me understand ownership and workplace expectations.
+          Teaching helped me become a clearer communicator. Research helped me
+          develop patience with technical uncertainty. Chicago and Miami helped
+          me connect planning, culture, and perspective to my personal growth.
+        </p>
+        <p>
+          Most importantly, this year helped me move from simply trying to gain
+          experience to thinking more carefully about which experiences fit the
+          future I want to build.
+        </p>
+      </section>
+
+      <section class="review-section">
+        <h2>Goals for the Upcoming Year</h2>
+        <p>
+          For the upcoming year, my first goal is to secure a co-op that is more
+          closely aligned with my interests, especially in mechanical
+          engineering, technical analysis, design, testing, manufacturing, or
+          process improvement. I also want to network more intentionally so I can
+          better understand different career paths before narrowing my direction
+          too early.
+        </p>
+        <p>
+          At the same time, I want to explore my growing interest in business and
+          finance. I still want to build a strong engineering foundation, but I
+          can also see myself using that foundation in a broader path involving
+          consulting, finance, investment banking, or eventually the CFA track.
+          To explore this, I hope to get involved with organizations such as
+          Queen City Consulting, University Funding Board, and Bearcat Ventures.
+        </p>
+        <p>
+          Overall, my goal is to become more intentional. I want to keep building
+          technical knowledge while also exploring the business side of my
+          interests, so that my next experiences are not just resume builders,
+          but meaningful steps toward a clearer professional direction.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer><p>&copy; 2026 Aayush Layane</p></footer>
+  <script>
+    const yearLabels = ['2024-2025', '2025-2026'];
+    const reviewTitle = document.getElementById('reviewTitle');
+    const yearDropdown = document.getElementById('yearDropdown');
+    const yearDropdownTrigger = document.getElementById('yearDropdownTrigger');
+
+    function switchYear(year) {
+      if (!yearLabels.includes(year)) return;
+
+      document.querySelectorAll('.year-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'review-' + year);
+      });
+
+      document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+        link.classList.toggle('selected', link.dataset.year === year);
+      });
+
+      reviewTitle.textContent = 'Year-in-Review: ' + year;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    yearDropdown.addEventListener('mouseenter', () => {
+      yearDropdownTrigger.setAttribute('aria-expanded', true);
+    });
+
+    yearDropdown.addEventListener('mouseleave', () => {
+      yearDropdownTrigger.setAttribute('aria-expanded', false);
+    });
+
+    yearDropdown.addEventListener('focusin', () => {
+      yearDropdownTrigger.setAttribute('aria-expanded', true);
+    });
+
+    yearDropdown.addEventListener('focusout', () => {
+      yearDropdownTrigger.setAttribute('aria-expanded', false);
+    });
+
+    document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        switchYear(link.dataset.year);
+        yearDropdownTrigger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
 </body>
 </html>

@@ -28,10 +28,162 @@
   </nav>
 </header>
 
-<main>
+<main class="interests-main">
   <h1>Interests</h1>
+
+  <section class="interest-section">
+    <div class="interest-gallery" data-gallery="Formula 1">
+      <img class="interest-image" src="assets/gokart.jpeg" alt="Aayush seated in a go-kart at an indoor track">
+      <div class="interest-thumbnails" aria-label="Formula 1 photo thumbnails">
+        <button class="interest-thumbnail active" type="button" data-src="assets/gokart.jpeg" data-alt="Aayush seated in a go-kart at an indoor track" aria-label="Show go-kart photo" aria-pressed="true"><img src="assets/gokart.jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/cars.jpeg" data-alt="A collection of miniature sports cars" aria-label="Show miniature sports cars photo" aria-pressed="false"><img src="assets/cars.jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/cars (2).jpeg" data-alt="Sports cars parked along a brick street" aria-label="Show sports cars photo" aria-pressed="false"><img src="assets/cars (2).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/cars (3).jpeg" data-alt="A black Mercedes G-Class parked on a brick street" aria-label="Show Mercedes photo" aria-pressed="false"><img src="assets/cars (3).jpeg" alt=""></button>
+      </div>
+      <button class="view-gallery" type="button">View all photos</button>
+    </div>
+    <div class="interest-copy">
+      <h2>Formula 1</h2>
+      <p>I am so thankful I skipped one of my classes to watch a race back in 2023; it was the Australian Grand Prix, and I couldn't help but fall in love with Formula 1. The cutting-edge technology, along with intense strategy and immense skill, blows my mind. I have been following it passionately ever since. I am also a member of Bearcat Motorsports and would like to create an impact in the club.</p>
+    </div>
+  </section>
+
+  <section class="interest-section interest-section-reverse">
+    <div class="interest-gallery" data-gallery="Photography">
+      <img class="interest-image" src="assets/coolphotos (3).jpeg" alt="Fifth Third Bank building and an American flag photographed at night">
+      <div class="interest-thumbnails" aria-label="Photography thumbnails">
+        <button class="interest-thumbnail active" type="button" data-src="assets/coolphotos (3).jpeg" data-alt="Fifth Third Bank building and an American flag photographed at night" aria-label="Show Fifth Third Bank photo" aria-pressed="true"><img src="assets/coolphotos (3).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/coolphotos.jpeg" data-alt="A quiet city street photographed on a snowy night" aria-label="Show snowy street photo" aria-pressed="false"><img src="assets/coolphotos.jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/coolphotos (1).jpeg" data-alt="A black Mercedes G-Class photographed on a brick street" aria-label="Show Mercedes street photo" aria-pressed="false"><img src="assets/coolphotos (1).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/coolphotos (2).jpeg" data-alt="A bright light illuminating a textured brick wall" aria-label="Show brick wall photo" aria-pressed="false"><img src="assets/coolphotos (2).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/coolphotos (4).jpeg" data-alt="The interior of a bus illuminated in deep blue light" aria-label="Show blue bus photo" aria-pressed="false"><img src="assets/coolphotos (4).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/coolphotos (5).jpeg" data-alt="A city photograph from Aayush's collection" aria-label="Show city photo" aria-pressed="false"><img src="assets/coolphotos (5).jpeg" alt=""></button>
+      </div>
+      <button class="view-gallery" type="button">View all photos</button>
+    </div>
+    <div class="interest-copy">
+      <h2>Photography</h2>
+      <p>I am very fond of photography. I believe to take a good photo, you need the right time; you need the photo to be very natural and have a very good perspective. I took this photo on the right, and I think its very unconventionally attractive. I plan on putting all the photos I took on this website. So be around if you liked this photo.</p>
+    </div>
+  </section>
+
+  <section class="interest-section">
+    <div class="interest-gallery" data-gallery="Cooking">
+      <img class="interest-image" src="assets/food (2).jpeg" alt="A homemade dessert topped with cream and pistachios">
+      <div class="interest-thumbnails" aria-label="Cooking photo thumbnails">
+        <button class="interest-thumbnail active" type="button" data-src="assets/food (2).jpeg" data-alt="A homemade dessert topped with cream and pistachios" aria-label="Show dessert photo" aria-pressed="true"><img src="assets/food (2).jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/food.jpeg" data-alt="A homemade fruit and yogurt dish" aria-label="Show fruit dish photo" aria-pressed="false"><img src="assets/food.jpeg" alt=""></button>
+        <button class="interest-thumbnail" type="button" data-src="assets/food (3).jpeg" data-alt="A homemade Indian curry garnished with herbs" aria-label="Show curry photo" aria-pressed="false"><img src="assets/food (3).jpeg" alt=""></button>
+      </div>
+      <button class="view-gallery" type="button">View all photos</button>
+    </div>
+    <div class="interest-copy">
+      <h2>Cooking</h2>
+      <p>Cooking is something I do during my free time, when I want to try new stuff or just relax. It is my go-to activity when I am burdened by work, assignments, etc. I have tried making dishes from many different cuisines, like guacamole, shakshouka, arrabbiatata pasta, blueberry cheesecake, and obviously my favorite, the Indian cuisine. I hope to continue this habit as I can make my own delicious food and its just a good skill to have in general.</p>
+    </div>
+  </section>
 </main>
 
+<div class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close photo gallery">&times;</button>
+  <button class="lightbox-arrow lightbox-previous" type="button" aria-label="Previous photo">&#8249;</button>
+  <figure class="lightbox-content">
+    <img class="lightbox-image" alt="">
+    <figcaption><span class="lightbox-title"></span><span class="lightbox-count"></span></figcaption>
+  </figure>
+  <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+  const galleries = document.querySelectorAll('.interest-gallery');
+  const lightbox = document.querySelector('.gallery-lightbox');
+  const lightboxImage = lightbox.querySelector('.lightbox-image');
+  const lightboxTitle = lightbox.querySelector('.lightbox-title');
+  const lightboxCount = lightbox.querySelector('.lightbox-count');
+  let activeGallery = [];
+  let activeGalleryTitle = '';
+  let activePhotoIndex = 0;
+  let lastFocusedButton = null;
+  let touchStartX = 0;
+
+  galleries.forEach((gallery) => {
+    const featuredImage = gallery.querySelector('.interest-image');
+    const thumbnails = [...gallery.querySelectorAll('.interest-thumbnail')];
+
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => {
+        featuredImage.src = thumbnail.dataset.src;
+        featuredImage.alt = thumbnail.dataset.alt;
+        thumbnails.forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-pressed', 'false');
+        });
+        thumbnail.classList.add('active');
+        thumbnail.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    gallery.querySelector('.view-gallery').addEventListener('click', (event) => {
+      activeGallery = thumbnails.map((thumbnail) => ({
+        src: thumbnail.dataset.src,
+        alt: thumbnail.dataset.alt
+      }));
+      activeGalleryTitle = gallery.dataset.gallery;
+      activePhotoIndex = Math.max(0, thumbnails.findIndex((thumbnail) => thumbnail.classList.contains('active')));
+      lastFocusedButton = event.currentTarget;
+      openLightbox();
+    });
+  });
+
+  function renderLightboxPhoto() {
+    const photo = activeGallery[activePhotoIndex];
+    lightboxImage.src = photo.src;
+    lightboxImage.alt = photo.alt;
+    lightboxTitle.textContent = activeGalleryTitle;
+    lightboxCount.textContent = `${activePhotoIndex + 1} / ${activeGallery.length}`;
+  }
+
+  function openLightbox() {
+    renderLightboxPhoto();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('gallery-open');
+    lightbox.querySelector('.lightbox-close').focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('gallery-open');
+    if (lastFocusedButton) lastFocusedButton.focus();
+  }
+
+  function moveLightbox(direction) {
+    activePhotoIndex = (activePhotoIndex + direction + activeGallery.length) % activeGallery.length;
+    renderLightboxPhoto();
+  }
+
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox-previous').addEventListener('click', () => moveLightbox(-1));
+  lightbox.querySelector('.lightbox-next').addEventListener('click', () => moveLightbox(1));
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  lightboxImage.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].screenX;
+  }, { passive: true });
+  lightboxImage.addEventListener('touchend', (event) => {
+    const distance = event.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(distance) > 45) moveLightbox(distance < 0 ? 1 : -1);
+  }, { passive: true });
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
+  });
+</script>
 
 </body>
 </html>
